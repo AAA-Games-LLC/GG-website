@@ -1,0 +1,60 @@
+---
+interface Props {
+  text: string;
+  href: string;
+  class?: string;
+}
+
+const { text, href, class: className } = Astro.props;
+---
+
+<a href={href} class:list={["button-box", className]}>
+  <div class="button-content">
+    <div class="top-row">┌{Array(text.length + 2).fill("─").join("")}┐</div>
+    <div class="middle-row">│ {text} │</div>
+    <div class="bottom-row">└{Array(text.length + 2).fill("─").join("")}┘</div>
+  </div>
+  <div class="button-shadow">
+    <div class="shadow-row">{Array(text.length + 6).fill("░").join("")}</div>
+    <div class="shadow-row">{Array(text.length + 6).fill("░").join("")}</div>
+  </div>
+</a>
+
+<style>
+  .button-box {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+    margin: 0 0 1rem 0;
+  }
+
+  .button-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .button-shadow {
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    z-index: 1;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+
+  .top-row, .middle-row, .bottom-row, .shadow-row {
+    white-space: pre;
+    line-height: 1;
+  }
+
+  .button-box:hover {
+    transform: translate(-0.15rem, -0.15rem);
+  }
+
+  .button-box:active {
+    transform: translate(0.1rem, 0.1rem);
+  }
+</style>

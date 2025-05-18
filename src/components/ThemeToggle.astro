@@ -1,0 +1,47 @@
+---
+
+---
+
+<button id="theme-toggle" aria-label="Toggle dark mode">
+    <div class="toggle-icon">
+        <span class="moon">☽</span>
+    </div>
+</button>
+
+<style>
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 100;
+        font-size: 1.5rem;
+        line-height: 1;
+        padding: 0.5rem;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 5s ease;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    .toggle-icon {
+        display: inline-block;
+        user-select: none;
+    }
+
+    /* Show the sun in light theme and moon in dark theme */
+    :global([data-theme="light"]) .moon {
+        transform: rotate(0deg);
+    }
+
+    :global([data-theme="dark"]) .moon {
+        transform: rotate(180deg);
+    }
+</style>

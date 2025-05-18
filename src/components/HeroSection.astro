@@ -1,0 +1,147 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imagePosition: 'left' | 'right';
+  index: number;
+}
+
+const { title, description, imagePosition, index } = Astro.props;
+---
+
+<section class:list={["hero-section", `image-${imagePosition}`]}>
+  <div class="content-wrapper">
+    <div class="text-content">
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+    <div class="image-content">
+      <!-- Placeholder for text art image -->
+      <div class="text-art-placeholder">
+        <p>[Text Art Placeholder #{index}]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider">
+  <div class="divider-line">
+    ╭{Array(20).fill("─").join("")}╮ · ╭{Array(20).fill("─").join("")}╮
+  </div>
+</div>
+
+<style>
+  .hero-section {
+    width: 100%;
+    padding: 4rem calc(var(--gutter) + 1rem);
+    position: relative;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 3rem;
+  }
+
+  .image-right .content-wrapper {
+    flex-direction: row;
+  }
+
+  .image-left .content-wrapper {
+    flex-direction: row-reverse;
+  }
+
+  .text-content {
+    flex: 1;
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+    animation-delay: calc(0.2s * var(--index, 1));
+  }
+
+  .image-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+  }
+
+  .text-art-placeholder {
+    border: 1px dashed var(--text);
+    padding: 2rem;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .section-divider {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    color: var(--text);
+    opacity: 0.8;
+  }
+
+  .divider-line {
+    white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .content-wrapper,
+    .image-right .content-wrapper,
+    .image-left .content-wrapper {
+      flex-direction: column;
+    }
+
+    .image-content {
+      order: 1;
+      width: 100%;
+    }
+
+    .text-content {
+      order: 2;
+      width: 100%;
+    }
+    
+    .text-art-placeholder {
+      height: 200px;
+    }
+  }
+</style>
+
+<script define:vars={{ index }}>
+  // Set animation delay based on index
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.hero-section');
+    if (sections[index-1]) {
+      const textContent = sections[index-1].querySelector('.text-content');
+      if (textContent) {
+        textContent.style.setProperty('--index', index);
+      }
+    }
+  });
+</script>

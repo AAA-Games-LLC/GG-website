@@ -1,0 +1,108 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <div class="footer-wrapper">
+    <div class="footer-box">
+      <div class="top-row">┌─{Array(50).fill("─").join("")}─┐</div>
+      <div class="content-row">
+        <div class="footer-section">
+          <h3>Glyph & Glory</h3>
+          <p>A text-based MMORPG adventure</p>
+          <p>© {currentYear} All rights reserved</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href="#">Discord</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Reddit</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom-row">└─{Array(50).fill("─").join("")}─┘</div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    width: 100%;
+    padding: 2rem calc(var(--gutter) + 1rem);
+    margin-top: auto;
+  }
+
+  .footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-box {
+    color: var(--text);
+    margin-top: 2rem;
+  }
+
+  .top-row, .bottom-row {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .content-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  a:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .content-row {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+</style>
